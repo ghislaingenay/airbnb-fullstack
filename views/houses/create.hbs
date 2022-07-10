@@ -1,0 +1,61 @@
+{{>nav}}
+<div class="container">
+  <h1 class="pt-3 pb-3">List a house</h1>
+  <form>
+    <div class="mb-3">
+      <h6 class="font-weight-bold mb-1 mt-0">Short Title</h6>
+      <input type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+      <h6 class="font-weight-bold mb-1 mt-0">Description</h6>
+      <textarea class="form-control" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+      <h6 class="font-weight-bold mb-1 mt-0">Number of rooms</h6>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Any rooms</option>
+        <option value="1">1 room</option>
+        <option value="2">2 rooms</option>
+        <option value="3">3 rooms</option>
+        <option value="4">4 rooms</option>
+        <option value="5">5 rooms</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <h6 class="font-weight-bold mb-1 mt-0">Location</h6>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Any locations</option>
+        <option value="1">Koh Phangan</option>
+        <option value="2">Koh Samui</option>
+        <option value="3">Bali</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <h6 class="font-weight-bold mb-1 mt-0">Price (per night)</h6>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fa-solid fa-dollar-sign"></i></span>
+        <input type="number" class="form-control" placeholder="max price" aria-label="Username"
+          aria-describedby="basic-addon1">
+      </div>
+    </div>
+    <div class="mb-3">
+      <h6 class="font-weight-bold mb-1 mt-0">Add photos (up to 9)</h6>
+      <div class="container">
+        <div class="row row-cols-12">
+          <input type="text" class="form-control mb-2" placeholder="http://">
+          <input type="text" class="form-control mb-2" placeholder="http://">
+          <input type="text" class="form-control mb-2" placeholder="http://">
+          <input type="text" class="form-control mb-2" placeholder="http://">
+          <input type="text" class="form-control mb-2" placeholder="http://">
+          <input type="text" class="form-control mb-2" placeholder="http://">
+          <input type="text" class="form-control mb-2" placeholder="http://">
+          <input type="text" class="form-control mb-2" placeholder="http://">
+          <input type="text" class="form-control" placeholder="http://">
+
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success mb-4">Submit</button>
+  </form>
+</div>
