@@ -49,7 +49,7 @@ app.use("/", require('./controllers/index.js'))
 app.use("/auth", require('./controllers/auth.js'))
 app.use("/bookings", require('./controllers/bookings.js'))
 app.use("/houses", require('./controllers/houses.js'))
-app.use("profile", require('./controllers/profile.js'))
+app.use("/profile", require('./controllers/profile.js'))
 app.use("/reviews", require('./controllers/reviews.js'))
 // ::::
 
