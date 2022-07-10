@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const houseSchema = new mongoose.Schema({
   description: {
     type: String,
-    require: true,
+    required: true,
   },
   host: {
     type: ObjectId,
@@ -12,20 +12,20 @@ const houseSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    require: true,
+    required: true,
   },
   photos: [String],
   price: {
     type: Number,
-    require: true,
+    required: true,
   },
   rooms: {
     type: Number,
-    require: true,
+    required: true,
   },
   title: {
     title: String,
-    require: true,
+    required: true,
   }
 })
 

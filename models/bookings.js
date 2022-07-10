@@ -5,21 +5,21 @@ const bookingSchema = new mongoose.Schema({
   author: {
     type: ObjectId,
     ref: "users",
-    require: true,
+    required: true,
   },
   date: {
     type: Date,
-    require: true,
+    required: true,
     default: Date.now,
   },
   description: {
     type: String,
-    require: true,
+    required: true,
   },
   house: {
     type: ObjectId,
     ref: "houses",
-    require: true,
+    required: true,
   },
   rating: Number
 })
