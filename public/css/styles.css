@@ -1,0 +1,16 @@
+
+.building a {
+    text-decoration: none;
+    color: black
+}
+
+.login {
+    height: 100vh;
+    background-image: url(../images/thailand.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.signup a {
+   color: blueviolet
+}
