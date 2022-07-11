@@ -2,7 +2,7 @@ const express = require('express')
 const reset = require('nodemon')
 const router = express.Router()
 const bcrypt = require('bcrypt')
-const saltRounds = 10;
+const salt = bcrypt.genSaltSync(10);
 
 const Users = require('../models/users')
 
@@ -24,30 +24,33 @@ router.get("/logout", (req, res) => {
 })
 
 router.post("/login", (req, res) => {
-  //.........
+
 })
 
 router.post("/signup", async (req, res) => {
   await Users.findOne({
     email: req.body.email
-  }, (err, founduser) => {
+  }, (err, foundUser) => {
     if (err) {
       res.render("error")
     } else {
-      if (founduser) {
-        console.log('User with this email already exists')
-        res.render("login")
+      if (foundUser) {
+        res.redirect("error")
       } else {
-        let user = Users.create({
-          name: req.body.fullname,
-          email: req.body.email,
-          password: req.body.password,
-          avatar: req.body.picture
-        }, err => res.render("error"))
-        res.redirect("./houses/list")
+        bcrypt.genSalt(10, function (err, salt) {
+          bcrypt.hash(req.body.password, salt, (err, hash) => {
+            let user = Users.create({
+              name: req.body.fullname,
+              email: req.body.email,
+              password: hash,
+              avatar: req.body.picture
+            }, err => res.render("error"))
+            res.redirect("/houses/list"), err => res.render("error")
+          })
+        });
       }
     }
-  })
+  });
 })
 
 
