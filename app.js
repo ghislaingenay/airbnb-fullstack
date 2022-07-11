@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 const hbs = require('hbs')
 const hbsUtils = require('hbs-utils')(hbs)
 const methodOverride = require('method-override')
+const bcrypt = require('bcryptjs')
 require('dotenv').config()
 
 // Build the App
