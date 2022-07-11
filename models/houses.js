@@ -24,7 +24,7 @@ const houseSchema = new mongoose.Schema({
     required: true,
   },
   title: {
-    title: String,
+    type: String,
     required: true,
   }
 })

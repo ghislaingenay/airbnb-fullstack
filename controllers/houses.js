@@ -2,6 +2,9 @@ const express = require('express')
 const { reset } = require('nodemon')
 const router = express.Router()
 
+const Users = require('../models/users')
+const Houses = require('../models/houses')
+
 router.get("/", (req, res) => {
   let user = req.user
   if (req.isAuthenticated()){
@@ -57,18 +60,16 @@ router.post("/", (req, res) => {
 })
 
 router.patch("/:id", (req, res) => {
-  let user = req.user
   if (req.isAuthenticated()){
-    res.render("./houses/:id", {user: user})
+    res.render("./houses/:id")
   } else {
     res.redirect("/auth/login");
   }
 })
 
 router.delete("/:id", (req, res) => {
-  let user = req.user
   if (req.isAuthenticated()){
-    res.render("./houses/:id", {user: user})
+    res.render("./houses/:id")
   } else {
     res.redirect("/auth/login");
   }
