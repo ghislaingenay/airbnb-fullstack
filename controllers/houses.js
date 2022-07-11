@@ -35,7 +35,8 @@ router.get("/create", (req, res) => {
 router.get("/:id", (req, res) => {
   let user = req.user
   if (req.isAuthenticated()){
-    res.render("./houses/one", {user: user})
+    let house = await Houses.findById("").populate("host")
+    res.render("./houses/one", {user: user, house: house})
   } else {
     res.redirect("/auth/login");
   }
