@@ -31,7 +31,7 @@ router.post("/login", async (req, res, next) => {
     if (foundUser) {
       bcrypt.compare(req.body.loginpassword, foundUser.password, (err, result) => {
                 if (result === true) {
-                  res.send("The password was decrypted")
+                  res.redirect("/")
   }else {
     res.send("err")
   }})

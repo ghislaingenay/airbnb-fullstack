@@ -3,6 +3,7 @@ const { reset } = require('nodemon')
 const router = express.Router()
 
 router.get("/", (req, res) => {
+  res.redirect("/houses/list")
 //   if (req.isAuthenticated()){
 //     res.render("./houses/list")
 // } else {
