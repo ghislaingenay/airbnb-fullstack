@@ -24,14 +24,21 @@ router.get("/logout", (req, res) => {
 })
 
 router.post("/login", async (req, res, next) => {
+  try{
     await Users.findOne({
       email: req.body.loginemail
   }, (err, foundUser) => {
     if (foundUser) {
-      res.send("found user")
+      bcrypt.compare(req.body.loginpassword, foundUser.password, (err, result) => {
+                if (result === true) {
+                  res.send("The password was decrypted")
   }else {
     res.send("err")
   }})
+}})
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.post("/signup", async (req, res) => {
