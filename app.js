@@ -9,8 +9,10 @@ const mongoose = require('mongoose')
 const hbs = require('hbs')
 const hbsUtils = require('hbs-utils')(hbs)
 const methodOverride = require('method-override')
-const bcrypt = require('bcryptjs')
 require('dotenv').config()
+
+const bcrypt = require('bcryptjs')
+const passport = require('passport');
 
 // Build the App
 const app = express()
@@ -41,6 +43,8 @@ mongoose.connect(
     console.log('Connected to MongoDB')
   }
 )
+
+
 
 // Security
 require('./express-sessions')(app)
