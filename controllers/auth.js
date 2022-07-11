@@ -23,8 +23,15 @@ router.get("/logout", (req, res) => {
   res.redirect("/auth/login")
 })
 
-router.post("/login", (req, res) => {
-
+router.post("/login", async (req, res, next) => {
+    await Users.findOne({
+      email: req.body.loginemail
+  }, (err, foundUser) => {
+    if (foundUser) {
+      res.send("found user")
+  }else {
+    res.send("err")
+  }})
 })
 
 router.post("/signup", async (req, res) => {
@@ -35,7 +42,7 @@ router.post("/signup", async (req, res) => {
       res.render("error")
     } else {
       if (foundUser) {
-        res.redirect("error")
+        res.render("error")
       } else {
         bcrypt.genSalt(10, function (err, salt) {
           bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -45,6 +52,8 @@ router.post("/signup", async (req, res) => {
               password: hash,
               avatar: req.body.picture
             }, err => res.render("error"))
+            // req.login(user, (err) => {
+            //   if (err) { throw err }})
             res.redirect("/houses/list"), err => res.render("error")
           })
         });
