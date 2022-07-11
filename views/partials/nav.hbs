@@ -2,11 +2,17 @@
   <div class="container">
     <a class="navbar-brand"><img src="/images/logo-airbnb.png" alt="Airbnb logo" width="100px"></a>
     <form class="d-flex ps-5" role="search">
-      <button class="btn btn-outline-secondary" type="button">
-        <img class="img-fluid rounded-circle" src="https://randomuser.me/api/portraits/men/11.jpg" width="20px"
-          alt="profile picture"> Ghislain Genay
-      </button>
-      <button class="btn btn-outline-secondary ms-2" type="submit">Logout</button>
+      {{#if user}}
+      <a href="/profile" target="_blank"><button class="btn btn-outline-secondary" type="button">
+          <img class="img-fluid rounded-circle" src="{{user.picture}}" width="20px" alt="profile picture"> {{user.name}}
+        </button>
+      </a>
+      <button class="btn btn-outline-secondary ms-2" type="submit"><a href="/auth/logout">Logout</a></button>
+      {{else}}
+      <a href="/auth/login">
+        <button class="btn btn-outline-secondary ms-2" type="submit"><a href="/auth/login">Login</a></button>
+      </a>
+      {{/if}}
     </form>
   </div>
 </nav>
