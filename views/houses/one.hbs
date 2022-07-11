@@ -12,7 +12,7 @@
     <div class="col align-self-center col-lg-6 col-12  ">
 
       <div class="row row-cols-lg-3  row-cols-5 pt-2 pt-lg-0 pt-sm-4 text-end g-4">
-        {{#each photos as |photo|}}
+        {{#each house.photos as |photo|}}
         <div class="col px-0 align-items-center side-picture">
           <img class="img-fluid" src="{{photo}}" alt="" width="70%">
         </div>
@@ -78,7 +78,7 @@
     <div class="col-lg-4 col-sm-12 mb-4">
       <div class="card p-3 shadow text-start">
         <form action="">
-          <h3>$350/night</h3>
+          <h3>${{house.price}}/night</h3>
           <i class="fa-solid fa-thumbs-up text-success pe-1"></i><small>2 Reviews</small>
           <textarea class="form-control mt-2" placeholder="Send the host a message..." id="exampleFormControlTextarea1"
             rows="5"></textarea>
