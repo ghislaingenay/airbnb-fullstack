@@ -12,69 +12,11 @@
     <div class="col align-self-center col-lg-6 col-12  ">
 
       <div class="row row-cols-lg-3  row-cols-5 pt-2 pt-lg-0 pt-sm-4 text-end g-4">
-
-        <!-- Image 1 -->
+        {{#each photos as |photo|}}
         <div class="col px-0 align-items-center side-picture">
-          <img class="img-fluid"
-            src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_02.png"
-            alt="Picture Luxury Villa Chaweng" width="70%">
+          <img class="img-fluid" src="{{photo}}" alt="" width="70%">
         </div>
-
-        <!-- Image 2 -->
-        <div class="col px-0 align-items-center">
-          <img class="img-fluid"
-            src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_03.png"
-            alt="Picture Luxury Villa Chaweng" width="70%">
-        </div>
-
-        <!-- Image 3 -->
-        <div class="col px-0 align-items-center">
-          <img class="img-fluid "
-            src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_04.png"
-            alt="Picture Luxury Villa Chaweng" width="70%">
-        </div>
-
-        <!-- Image 4 -->
-        <div class="col px-0 align-items-center">
-          <img class="img-fluid"
-            src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_05.png"
-            alt="Picture Luxury Villa Chaweng" width="70%">
-        </div>
-
-        <!-- Image 5 -->
-        <div class="col px-0 align-items-center">
-          <img class="img-fluid"
-            src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_06.png"
-            alt="Picture Luxury Villa Chaweng" width="70%">
-        </div>
-
-        <!-- Image 6 -->
-        <div class="col px-0 align-items-center">
-          <img class="img-fluid"
-            src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_07.png"
-            alt="Picture Luxury Villa Chaweng" width="70%">
-        </div>
-
-        <!-- Image 7 -->
-        <div class="col  px-0 align-items-center">
-          <img class="img-fluid"
-            src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_08.png"
-            alt="Picture Luxury Villa Chaweng" width="70%">
-        </div>
-
-        <!-- Image 8 -->
-        <div class="col  px-0 align-items-center">
-          <img class="img-fluid"
-            src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_09.png"
-            alt="Picture Luxury Villa Chaweng" width="70%">
-        </div>
-
-        <!-- Image 9 -->
-        <div class="col  px-0 align-items-center">
-          <img class="img-fluid"
-            src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_05.png"
-            alt="Picture Luxury Villa Chaweng" width="70%">
-        </div>
+        {{/each}}
       </div>
     </div>
   </div>
@@ -84,8 +26,8 @@
   <div class="row">
     <div class="col-lg-7 col-xs-12">
       <!-- Left -->
-      <h1> Luxury Villa in Chaweng</h1>
-      <i class="fa-solid fa-location-dot text-success pe-1"></i><small>Koh Samui - 4 rooms</small>
+      <h1>{{house.title}}</h1>
+      <i class="fa-solid fa-location-dot text-success pe-1"></i><small>{{house.location}} - {{house.rooms}}</small>
       <div class="container profile mt-4 mb-4">
         <div class="row">
           <div class="col-1">
@@ -94,18 +36,12 @@
           </div>
           <div class="col-11">
             <small class="text-secondary">Hosted by</small>
-            <h6>Ghislain Genay</h6>
+            <h6>{{house.user.fullname}}</h6>
           </div>
         </div>
       </div>
 
-      <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+      <p class="mt-2">{{house.description}}
       </p>
 
       <h2 class="mt-5">1 Review</h2>
