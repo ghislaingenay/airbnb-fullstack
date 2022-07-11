@@ -24,50 +24,51 @@ router.get("/logout", (req, res) => {
 })
 
 router.post("/login", async (req, res, next) => {
-  try{
+  try {
     await Users.findOne({
       email: req.body.loginemail
-  }, (err, foundUser) => {
-    if (foundUser) {
-      bcrypt.compare(req.body.loginpassword, foundUser.password, (err, result) => {
-                if (result === true) {
-                  res.redirect("/")
-  }else {
-    res.send("err")
-  }})
-}})
+    }, (err, foundUser) => {
+      if (foundUser) {
+        bcrypt.compare(req.body.loginpassword, foundUser.password, (err, result) => {
+          if (result === true) {
+            res.redirect("/")
+          } else {
+            res.send("err")
+          }
+        })
+      }
+    })
   } catch (err) {
     next(err)
   }
 })
 
-router.post("/signup", async (req, res) => {
-  await Users.findOne({
-    email: req.body.email
-  }, (err, foundUser) => {
-    if (err) {
-      res.render("error")
-    } else {
-      if (foundUser) {
-        res.render("error")
-      } else {
-        bcrypt.genSalt(10, function (err, salt) {
-          bcrypt.hash(req.body.password, salt, (err, hash) => {
-            let user = Users.create({
-              name: req.body.fullname,
-              email: req.body.email,
-              password: hash,
-              avatar: req.body.picture
-            }, err => res.render("error"))
-            // req.login(user, (err) => {
-            //   if (err) { throw err }})
-            res.redirect("/houses/list"), err => res.render("error")
-          })
-        });
-      }
+router.post("/signup", async (req, res, next) => {
+  try {
+    let user = await Users.findOne({
+      email: req.body.email
+    })
+    if (user) {
+      throw new Error("The user is already registered")
     }
-  });
+    let salt = bcrypt.genSaltSync(10)
+    let hash = bcrypt.hashSync(req.body.password, salt);
+    req.body.password = hash
+    let createUser = await Users.create({
+      avatar: req.body.picture,
+      email: req.body.email,
+      name: req.body.fullname,
+      password: req.body.password
+    })
+    req.login(createUser, loginError => {
+        res.redirect('/houses/list');
+    })
+    res.redirect("/houses/list")
+  } catch (err) {
+    next(err)
+  }
 })
+
 
 
 module.exports = router
