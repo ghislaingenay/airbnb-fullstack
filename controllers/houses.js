@@ -22,7 +22,6 @@ router.get("/list", (req, res) => {
   }
 })
 
-
 router.get("/create", (req, res) => {
   if (req.isAuthenticated()){
     let user = req.user
@@ -33,13 +32,11 @@ router.get("/create", (req, res) => {
 })
 
 router.get("/:id", async (req, res) => {
-  if (req.isAuthenticated()){
     let user = req.user
-    let house = await Houses.findById("").populate("host")
-    res.redirect("/houses/"+house._id, {user: user, house: house})
-  } else {
-    res.redirect("/auth/login");
-  }
+    let house = await Houses.findById(req.params.id).populate("host")
+    console.log(house);
+    res.render("houses/one", {user: user, house: house})
+  
 })
 
 router.get("/:id/edit", (req, res) => {
