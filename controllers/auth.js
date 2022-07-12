@@ -31,8 +31,8 @@ router.post("/login", async (req, res, next) => {
     if (user) {
       await bcrypt.compare(req.body.loginpassword, user.password, (err, result) => {
         if (result === true) {
-          req.login(user, loginError => {
-            res.redirect('/houses/list');
+          req.login(user, err => {
+            if(err) {throw err} else {res.render("./houses/list")}
           })
         } else {
           res.send("The password is wrong");
@@ -62,8 +62,9 @@ router.post("/signup", async (req, res, next) => {
       name: req.body.fullname,
       password: req.body.password
     })
-    req.login(createUser, loginError => {
-      res.redirect('/houses/list');
+    req.login(createUser, err => {
+      if (err) {throw err} else {res.redirect('/houses/list')}
+
     })
     res.redirect("/houses/list")
   } catch (err) {
