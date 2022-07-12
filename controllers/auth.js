@@ -56,12 +56,7 @@ router.post("/signup", async (req, res, next) => {
     }
     let hash = bcrypt.hashSync(req.body.password, salt);
     req.body.password = hash
-    let createUser = await Users.create({
-      avatar: req.body.picture,
-      email: req.body.email,
-      name: req.body.fullname,
-      password: req.body.password
-    })
+    let createUser = await Users.create(req.body)
     req.login(createUser, err => {
       if (err) {throw err} else {res.redirect('/houses/list')}
 
