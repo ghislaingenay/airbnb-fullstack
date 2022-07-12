@@ -35,11 +35,11 @@ router.post("/login", async (req, res, next) => {
             if(err) {throw err} else {res.render("./houses/list")}
           })
         } else {
-          res.send("The password is wrong");
+          throw new Error ("Email or Password is wrong");
         }
       })
     } else {
-      throw new Error("No user found in the database")
+      throw new Error("You are not registered. Please create an account")
     }
   } catch (err) {
     next(err)
