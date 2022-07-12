@@ -6,16 +6,16 @@ const Users = require('../models/users')
 const Houses = require('../models/houses')
 
 router.get("/", (req, res) => {
-  let user = req.user
   if (req.isAuthenticated()){
+    let user = req.user
     res.render("houses/list", {user: user})
   } else {
     res.redirect("/auth/login");
   }
 })
 router.get("/list", (req, res) => {
-  let user = req.user
   if (req.isAuthenticated()){
+    let user = req.user
     res.render("houses/list", {user: user})
   } else {
     res.redirect("/auth/login");
@@ -24,8 +24,8 @@ router.get("/list", (req, res) => {
 
 
 router.get("/create", (req, res) => {
-  let user = req.user
   if (req.isAuthenticated()){
+    let user = req.user
     res.render("houses/create", {user: user})
   } else {
     res.redirect("/auth/login");
@@ -33,8 +33,8 @@ router.get("/create", (req, res) => {
 })
 
 router.get("/:id", async (req, res) => {
-  let user = req.user
   if (req.isAuthenticated()){
+    let user = req.user
     let house = await Houses.findById("").populate("host")
     res.redirect("/houses/"+house._id, {user: user, house: house})
   } else {
@@ -43,8 +43,8 @@ router.get("/:id", async (req, res) => {
 })
 
 router.get("/:id/edit", (req, res) => {
-  let user = req.user
   if (req.isAuthenticated()){
+    let user = req.user
     res.render("houses/edit", {user: user})
   } else {
     res.redirect("/auth/login");
