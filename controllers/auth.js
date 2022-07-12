@@ -20,7 +20,13 @@ router.get("/signup", (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.logout()
-  res.redirect("/auth/login")
+  req.session.destroy(err => {
+    if (err) {
+      next(err)
+    }
+    res.clearCookie('connect.sid')
+    res.redirect("/auth/login")
+  })
 })
 
 router.post("/login", async (req, res, next) => {
@@ -32,10 +38,14 @@ router.post("/login", async (req, res, next) => {
       await bcrypt.compare(req.body.loginpassword, user.password, (err, result) => {
         if (result === true) {
           req.login(user, err => {
-            if(err) {throw err} else {res.render("./houses/list")}
+            if (err) {
+              throw err
+            } else {
+              res.render("./houses/list")
+            }
           })
         } else {
-          throw new Error ("Email or Password is wrong");
+          throw new Error("Email or Password is wrong");
         }
       })
     } else {
@@ -58,7 +68,11 @@ router.post("/signup", async (req, res, next) => {
     req.body.password = hash
     let createUser = await Users.create(req.body)
     req.login(createUser, err => {
-      if (err) {throw err} else {res.redirect('/houses/list')}
+      if (err) {
+        throw err
+      } else {
+        res.redirect('/houses/list')
+      }
 
     })
     res.redirect("/houses/list")
