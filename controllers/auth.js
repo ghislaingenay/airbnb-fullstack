@@ -41,7 +41,7 @@ router.post("/login", async (req, res, next) => {
             if (err) {
               throw err
             } else {
-              res.render("./houses/list")
+              res.render("houses/list")
             }
           })
         } else {
@@ -73,9 +73,7 @@ router.post("/signup", async (req, res, next) => {
       } else {
         res.redirect('/houses/list')
       }
-
     })
-    res.redirect("/houses/list")
   } catch (err) {
     next(err)
   }
