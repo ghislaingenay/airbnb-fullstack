@@ -38,7 +38,7 @@ router.get("/:id", async (req, res) => {
     let house = await Houses.findById(req.params.id).populate("host")
     console.log(house);
     res.render("houses/one", {user: user, house: house})
-  
+
 })
 
 router.get("/:id/edit", (req, res) => {

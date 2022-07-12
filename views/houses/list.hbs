@@ -8,11 +8,11 @@
         <div class="col col-lg-2 col-md-4 col-12  mb-sm-2">
           <div class="input-group">
             <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" name="location" aria-label="Default select example">
               <option selected>Any locations</option>
-              <option value="1">Koh Phangan</option>
-              <option value="2">Koh Samui</option>
-              <option value="3">Bali</option>
+              <option value="Koh Phangan">Koh Phangan</option>
+              <option value="Koh Phangan">Koh Phangan</option>Samui</option>
+              <option value="Bali">Bali</option>
             </select>
           </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="col col-lg-2 col-md-4 col-sm-12  mb-sm-2">
           <div class="input-group">
             <span class="input-group-text"><i class="fa-solid fa-house"></i></span>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" name="rooms" aria-label="Default select example">
               <option selected>Any rooms</option>
               <option value="1">1 room</option>
               <option value="2">2 rooms</option>
@@ -45,9 +45,9 @@
         <div class="col col-lg-2 col-md-4 col-sm-12  mb-sm-2">
           <div class="input-group">
             <span class="input-group-text"><i class="fa-solid fa-arrow-up-wide-short"></i></span>
-            <select class="form-select" aria-label="Default select example">
-              <option value="1">Price (low to high)</option>
-              <option value="2">Price (high to low)</option>
+            <select class="form-select" name="sortprice" aria-label="Default select example">
+              <option value="lowtohigh">Price (low to high)</option>
+              <option value="hightolow">Price (high to low)</option>
 
             </select>
           </div>
@@ -55,7 +55,7 @@
 
         <!-- Filter - search input -->
         <div class="col col-lg-2 col-md-4 col-sm-12 mb-sm-2">
-          <input type="text" class="form-control" placeholder="House name...">
+          <input type="text" name="search" class="form-control" placeholder="House name...">
         </div>
 
         <!-- Filter - Search button -->
