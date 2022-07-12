@@ -8,7 +8,8 @@ const houseSchema = new mongoose.Schema({
   },
   host: {
     type: ObjectId,
-    ref: "users"
+    ref: "users",
+    required: true
   },
   location: {
     type: String,

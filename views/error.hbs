@@ -1,3 +1,16 @@
-{{>nav}}
-{{message}}
-{{error.stack}}
+{{>nav user=user}}
+
+<div class="container pt-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <p class="my-0 ms-5">{{error.stack}}</p>
+      </div>
+    </div>
+  </div>
+</div>

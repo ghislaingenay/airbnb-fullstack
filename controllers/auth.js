@@ -20,7 +20,13 @@ router.get("/signup", (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.logout()
-  res.redirect("/auth/login")
+  req.session.destroy(err => {
+    if (err) {
+      next(err)
+    }
+    res.clearCookie('connect.sid')
+    res.redirect("/auth/login")
+  })
 })
 
 router.post("/login", async (req, res, next) => {
@@ -31,15 +37,19 @@ router.post("/login", async (req, res, next) => {
     if (user) {
       await bcrypt.compare(req.body.loginpassword, user.password, (err, result) => {
         if (result === true) {
-          req.login(user, loginError => {
-            res.redirect('/houses/list');
+          req.login(user, err => {
+            if (err) {
+              throw err
+            } else {
+              res.render("houses/list")
+            }
           })
         } else {
-          res.send("The password is wrong");
+          throw new Error("Email or Password is wrong");
         }
       })
     } else {
-      throw new Error("No user found in the database")
+      throw new Error("You are not registered. Please create an account")
     }
   } catch (err) {
     next(err)
@@ -56,16 +66,14 @@ router.post("/signup", async (req, res, next) => {
     }
     let hash = bcrypt.hashSync(req.body.password, salt);
     req.body.password = hash
-    let createUser = await Users.create({
-      avatar: req.body.picture,
-      email: req.body.email,
-      name: req.body.fullname,
-      password: req.body.password
+    let createUser = await Users.create(req.body)
+    req.login(createUser, err => {
+      if (err) {
+        throw err
+      } else {
+        res.redirect('/houses/list')
+      }
     })
-    req.login(createUser, loginError => {
-      res.redirect('/houses/list');
-    })
-    res.redirect("/houses/list")
   } catch (err) {
     next(err)
   }
