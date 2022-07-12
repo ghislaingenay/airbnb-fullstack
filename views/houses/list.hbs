@@ -67,8 +67,33 @@
   </div>
 </div>
 
-<!-- Cards -->
 <div class="container pt-4">
+  <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
+    {{#each houses as |house|}}
+    <div class="col">
+      <div class="card mb-4">
+        <img src="{{house.photos.[0]}}" class="card-img-top" alt="Luxury villa">
+        <div class="card-body">
+          <i class="fa-solid fa-location-dot pe-2"></i><small>{{house.location}} - {{house.rooms}} Rooms</small>
+          <h5 class="pt-2 pb-2 card-title">{{house.title}}</h5>
+          <div class="row">
+            <div class="col">
+              <i class="fa-solid fa-thumbs-up pe-1 text-success"></i><small>2 Reviews</small>
+            </div>
+            <div class="col text-end">
+              <small>${{house.price}}/night</small>
+            </div>
+            <a href="/houses/{{house.id}}" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+<!-- Cards -->
+{{!-- <div class="container pt-4">
   <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
 
     <div class="col">
@@ -219,4 +244,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
