@@ -2,7 +2,7 @@
 <!-- Filter -->
 <div class="filter text-bg-light">
   <div class="container py-2">
-    <form action="" method="">
+    <form action="/houses" method="GET">
       <div class="row">
         <!-- Filter - location -->
         <div class="col col-lg-2 col-md-4 col-12  mb-sm-2">
@@ -11,7 +11,7 @@
             <select class="form-select" name="location" aria-label="Default select example">
               <option selected>Any locations</option>
               <option value="Koh Phangan">Koh Phangan</option>
-              <option value="Koh Phangan">Koh Phangan</option>Samui</option>
+              <option value="Koh Samui">Koh Samui</option>
               <option value="Bali">Bali</option>
             </select>
           </div>
@@ -36,7 +36,7 @@
         <div class="col col-lg-2 col-md-4 col-sm-12  mb-sm-2">
           <div class="input-group">
             <span class="input-group-text"><i class="fa-solid fa-dollar-sign"></i></span>
-            <input type="number" class="form-control" placeholder="max price" aria-label="Username"
+            <input type="number" name="price" class="form-control" placeholder="max price" aria-label="Username"
               aria-describedby="basic-addon1">
           </div>
         </div>
