@@ -4,14 +4,14 @@
     <!-- Profile -->
     <div class=" col-12 col-lg-4">
       <h2 class="pb-2">Profile</h2>
-      <form action="" class="border-top pt-2 pt">
+      <form action="/profile" method="PATCH" class="border-top pt-2 pt">
         <h5 class="my-0 fs-6">Name</h5>
-        <input type="text" value="{{user.name}}" class="form-control">
+        <input type="text" name="prfname" value="{{user.name}}" class="form-control">
         <h5 class="mb-0 mt-2 fs-6">Email</h5>
-        <input type="email" value="{{user.email}}" class="form-control" placeholder="name@example.com">
+        <input type="email" name="prfemail" value="{{user.email}}" class="form-control" placeholder="name@example.com">
         <h5 class="mb- mt-2 fs-6">Profile picture</h5>
         <img class="rounded-circle d-block mb-2" src="{{user.picture}}" width="50px" alt="">
-        <input type="text" name="newavatar" class="form-control" placeholder="namedvdvdvd dv ">
+        <input type="text" name="newavatar" class="form-control">
         <button type="submit" class="btn btn-success mt-2">Save changes</button>
       </form>
     </div>
@@ -20,7 +20,8 @@
     <div class="col-lg-7 col-12 mt-lg-0 mt-4">
       <h2 class="pb-2">My listings</h2>
       <form action="" class="border-top pt-2">
-        <button type="button" class="btn btn-success my-2">List a house</button>
+        <button type="button" class="btn btn-success my-2"><a href="/houses/create" target="_blank"></a>List a
+          house</button>
 
         <!-- No house -->
         <div class="card mb-2">
@@ -35,8 +36,33 @@
           </div>
         </div>
 
-        <!-- Cards - house -->
+        {{#each houses as |house}}
         <div class="card mb-2">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <img class="img-fluid"
+                  src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_02.png"
+                  class="card-img-top" alt="...">
+              </div>
+              <div class="col-9">
+                <h4> {{house.title}}</h4>
+                <small class="text-secondary">{{house.location}} - {{house.rooms}} rooms</small>
+                <p class="mt-2">{{house.description}}
+                </p>
+                <button type="submit" class="btn btn-outline-secondary"><a href="/houses/{{house._id}}"
+                    target="_blank">View</a></button>
+                <button type="submit" class="btn btn-outline-success"><a
+                    href="/houses/{{house._id}}/edit">Edit</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Cards - house -->
+        {{!-- <div class="card mb-2">
           <div class="card-body">
             <div class="row">
               <div class="col-3">
@@ -61,9 +87,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
 
-        <div class="card mb-2">
+        {{!-- <div class="card mb-2">
           <div class="card-body">
             <div class="row">
               <div class="col-3">
@@ -89,7 +115,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
       </form>
     </div>
   </div>
