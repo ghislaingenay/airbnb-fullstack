@@ -1,4 +1,4 @@
-{{>nav}}
+{{>nav user=user}}
 <div class="container pt-4">
   <div class="row">
     <!-- Profile -->
@@ -6,13 +6,12 @@
       <h2 class="pb-2">Profile</h2>
       <form action="" class="border-top pt-2 pt">
         <h5 class="my-0 fs-6">Name</h5>
-        <input type="text" class="form-control">
+        <input type="text" value="{{user.name}}" class="form-control">
         <h5 class="mb-0 mt-2 fs-6">Email</h5>
-        <input type="email" class="form-control" placeholder="name@example.com">
+        <input type="email" value="{{user.email}}" class="form-control" placeholder="name@example.com">
         <h5 class="mb- mt-2 fs-6">Profile picture</h5>
-        <img class="rounded-circle d-block mb-2" src="https://randomuser.me/api/portraits/men/11.jpg" width="50px"
-          alt="">
-        <input type="text" class="form-control" placeholder="namedvdvdvd dv ">
+        <img class="rounded-circle d-block mb-2" src="{{user.picture}}" width="50px" alt="">
+        <input type="text" name="newavatar" class="form-control" placeholder="namedvdvdvd dv ">
         <button type="submit" class="btn btn-success mt-2">Save changes</button>
       </form>
     </div>
