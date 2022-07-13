@@ -21,12 +21,12 @@ router.get("/", async (req, res) => {
 
 router.patch("/", async (req, res, next) => {
   try {
-    // let foundUser = Users.findOne({
-    //   email: req.body.email
-    // })
-    // if (req.body.email === foundUser.email) {
-    //   throw new Error("This email is already taken")
-    // } else {
+    let foundUser = Users.findOne({
+      email: req.body.email
+    })
+    if (req.body.email === foundUser.email) {
+      throw new Error("This email is already taken")
+    } else {
     let updatedUser = await Users.findOneAndUpdate({
       email: req.body.email
     }, req.body, {
