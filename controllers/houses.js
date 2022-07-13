@@ -1,5 +1,7 @@
 const express = require('express')
-const {reset} = require('nodemon')
+const {
+  reset
+} = require('nodemon')
 const router = express.Router()
 
 const Users = require('../models/users')
@@ -8,44 +10,54 @@ const Houses = require('../models/houses')
 // Function which take one object and return only the key which have a value
 const cleanEmptyField = (object) => {
   for (let key in object) {
-    if (object[key] === "" || object[key] === 'Any locations' || object[key] === 'Any rooms') {
+    if (object[key] === "") {
       delete object[key]
     }
   }
-  if(object.search) {
-    object.search = {$regex: object.search,$options:"gi" }
-  }
-  if (object.price) {
-  object.price =  {$lte: object.price}
-}
   delete object.sortprice
   return object
 }
 
 
 router.get("/", async (req, res, next) => {
-  try{
-  if (req.isAuthenticated()) {
-    let user = req.user
-    console.log(cleanEmptyField(req.query))
+  try {
+    if (req.isAuthenticated()) {
+      let user = req.user
+      console.log(cleanEmptyField(req.query))
 
-    let filteredHouses = await Houses.find(cleanEmptyField(req.query))
-    if (filteredHouses.length > 0) {
-    let sortArray = filteredHouses.sort((a, b) => {
-    return req.query.lowtohigh ?  a.price - b.price : b.price - a.price
-    })} else {
-      throw new Error("No property were found in the DB")
+      req.query = cleanEmptyField(req.query)
+      if (req.query.price) {
+        req.query.price = {
+          $lte: req.query.price
+        }
+      }
+      if (req.query.title) {
+        let reg = new RegExp(req.query.title)
+        req.query.title = {
+          $regex: reg,
+          $options: "gi"
+        }
+      }
+
+      let filteredHouses = await Houses.find(req.query)
+      if (filteredHouses.length > 0) {
+        let sortArray = filteredHouses.sort((a, b) => {
+          return req.query.sortprice = "lowtohigh" ? a.price - b.price : b.price - a.price
+        })
+      } else {
+          throw new Error("No property were found in the DB")
+        }
+      res.render("houses/list", {
+        user: user,
+        houses: filteredHouses
+      })
+    } else {
+      res.redirect("/auth/login");
     }
-    res.render("houses/list", {
-      user: user,
-      houses: filteredHouses
-    })
-  } else {
-    res.redirect("/auth/login");
+  } catch (err) {
+    next(err)
   }
-} catch (err) {
-  next(err)
-}})
+})
 
 
 router.get("/list", async (req, res) => {
