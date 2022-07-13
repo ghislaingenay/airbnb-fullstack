@@ -98,11 +98,14 @@ router.get("/:id", async (req, res) => {
 
 })
 
-router.get("/:id/edit", (req, res) => {
+router.get("/:id/edit", async (req, res) => {
   if (req.isAuthenticated()) {
     let user = req.user
+    let houseId = await Houses.findById(req.params.id)
     res.render("houses/edit", {
-      user: user
+      user: user,
+      housed: houseId
+
     })
   } else {
     res.redirect("/auth/login");
