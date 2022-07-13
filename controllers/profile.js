@@ -27,30 +27,32 @@ router.patch("/", async (req, res, next) => {
     if (req.body.email === foundUser.email) {
       throw new Error("This email is already taken")
     } else {
-    let updatedUser = await Users.findOneAndUpdate({
-      email: req.body.email
-    }, req.body, {
-      new: true
-    })
-    let UserHouses = await Houses.find({host: updatedUser._id})
-    res.redirect("profile", {
-          user: updatedUser
-        })
-    req.logout()
-    req.login(updatedUser, err => {
-      if (err) {
-        throw err
-      } else {
-        res.redirect("profile", {
-          user: updatedUser,
-          houses: UserHouses
-        })
-      }
-    })
+      let updatedUser = await Users.findOneAndUpdate({
+        email: req.body.email
+      }, req.body, {
+        new: true
+      })
+      let UserHouses = await Houses.find({
+        host: updatedUser._id
+      })
+      res.redirect("profile", {
+        user: updatedUser
+      })
+      req.logout()
+      req.login(updatedUser, err => {
+        if (err) {
+          throw err
+        } else {
+          res.redirect("profile", {
+            user: updatedUser,
+            houses: UserHouses
+          })
+        }
+      })
+    }
   } catch (err) {
     next(err)
   }
 })
-
 
 module.exports = router
