@@ -4,14 +4,14 @@
     <!-- Profile -->
     <div class=" col-12 col-lg-4">
       <h2 class="pb-2">Profile</h2>
-      <form action="/profile" method="PATCH" class="border-top pt-2 pt">
+      <form action="/profile?_method=PATCH" method="POST" class="border-top pt-2 pt">
         <h5 class="my-0 fs-6">Name</h5>
-        <input type="text" name="prfname" value="{{user.name}}" class="form-control">
+        <input type="text" name="name" value="{{user.name}}" class="form-control">
         <h5 class="mb-0 mt-2 fs-6">Email</h5>
-        <input type="email" name="prfemail" value="{{user.email}}" class="form-control" placeholder="name@example.com">
+        <input type="email" name="email" value="{{user.email}}" class="form-control" placeholder="name@example.com">
         <h5 class="mb- mt-2 fs-6">Profile picture</h5>
         <img class="rounded-circle d-block mb-2" src="{{user.picture}}" width="50px" alt="">
-        <input type="text" name="newavatar" class="form-control">
+        <input type="text" name="picture" class="form-control">
         <button type="submit" class="btn btn-success mt-2">Save changes</button>
       </form>
     </div>
