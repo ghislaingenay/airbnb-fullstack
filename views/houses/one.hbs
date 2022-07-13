@@ -76,11 +76,12 @@
     <!-- Request a booking -->
     <div class="col-lg-4 col-sm-12 mb-4">
       <div class="card p-3 shadow text-start">
-        <form action="">
+        <form action="/bookings" method="POST">
+          <input type="hidden" name="house" value="{{house._id}}" />
           <h3>${{house.price}}/night</h3>
           <i class="fa-solid fa-thumbs-up text-success pe-1"></i><small>2 Reviews</small>
-          <textarea class="form-control mt-2" placeholder="Send the host a message..." id="exampleFormControlTextarea1"
-            rows="5"></textarea>
+          <textarea class="form-control mt-2" name="message" placeholder="Send the host a message..."
+            id="exampleFormControlTextarea1" rows="5"></textarea>
           <button type="submit" class="btn btn-success  mt-2">Request a booking</button>
         </form>
         <!-- <h3>$350/night</h3>
