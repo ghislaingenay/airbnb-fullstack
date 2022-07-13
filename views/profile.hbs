@@ -24,7 +24,7 @@
           house</button>
 
         <!-- No house -->
-        <div class="card mb-2">
+        {{!-- <div class="card mb-2">
           <div class="card-body">
             <div class="row">
               <div class="col-12">
@@ -34,9 +34,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
 
-        {{#each houses as |house}}
+        {{#each houses as |house|}}
         <div class="card mb-2">
           <div class="card-body">
             <div class="row">
@@ -58,65 +58,66 @@
             </div>
           </div>
         </div>
+        {{/each}}
 
-
-
-        <!-- Cards - house -->
-        {{!-- <div class="card mb-2">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-3">
-                <img class="img-fluid"
-                  src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_02.png"
-                  class="card-img-top" alt="...">
-              </div>
-              <div class="col-9">
-                <h4> Luxury Villa in Chaweng</h4>
-                <small class="text-secondary">Koh Samui - 4 rooms</small>
-                <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                  optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-                  obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                  nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                  tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-
-                </p>
-                <button type="submit" class="btn btn-outline-secondary">Edit</button>
-                <button type="submit" class="btn btn-outline-success">View</button>
-              </div>
-            </div>
-          </div>
-        </div> --}}
-
-        {{!-- <div class="card mb-2">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-3">
-                <img class="img-fluid"
-                  src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_02.png"
-                  class="card-img-top" alt="...">
-              </div>
-              <div class="col-9">
-                <h4> Luxury Villa in Chaweng</h4>
-                <small class="text-secondary">Koh Samui - 4 rooms</small>
-                <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                  optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-                  obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                  nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                  tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-                </p>
-                <form>
-                  <button type="submit" class="btn btn-outline-secondary">Edit</button>
-                  <button type="submit" class="btn btn-outline-success">View</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div> --}}
       </form>
     </div>
   </div>
 </div>
+
+
+<!-- Cards - house -->
+{{!-- <div class="card mb-2">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-3">
+        <img class="img-fluid"
+          src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_02.png"
+          class="card-img-top" alt="...">
+      </div>
+      <div class="col-9">
+        <h4> Luxury Villa in Chaweng</h4>
+        <small class="text-secondary">Koh Samui - 4 rooms</small>
+        <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+          molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+          numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+          optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+          obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+          nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+          tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+
+        </p>
+        <button type="submit" class="btn btn-outline-secondary">Edit</button>
+        <button type="submit" class="btn btn-outline-success">View</button>
+      </div>
+    </div>
+  </div>
+</div> --}}
+
+{{!-- <div class="card mb-2">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-3">
+        <img class="img-fluid"
+          src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_02.png"
+          class="card-img-top" alt="...">
+      </div>
+      <div class="col-9">
+        <h4> Luxury Villa in Chaweng</h4>
+        <small class="text-secondary">Koh Samui - 4 rooms</small>
+        <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+          molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+          numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+          optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+          obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+          nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+          tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+        </p>
+        <form>
+          <button type="submit" class="btn btn-outline-secondary">Edit</button>
+          <button type="submit" class="btn btn-outline-success">View</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> --}}

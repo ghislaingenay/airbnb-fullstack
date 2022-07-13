@@ -6,8 +6,9 @@ const Houses = require('../models/houses')
 
 router.get("/", async (req, res) => {
   if (req.isAuthenticated()) {
+    let user = req.user
     let selectedHouses = await Houses.find({
-      host: req.user.name
+      host: req.user._id
     })
     res.render("profile", {
       user: user,
@@ -20,27 +21,35 @@ router.get("/", async (req, res) => {
 
 router.patch("/", async (req, res, next) => {
   try {
-    let foundUser = Users.findOne({
+    // let foundUser = Users.findOne({
+    //   email: req.body.email
+    // })
+    // if (req.body.email === foundUser.email) {
+    //   throw new Error("This email is already taken")
+    // } else {
+    let updatedUser = await Users.findOneAndUpdate({
       email: req.body.email
+    }, req.body, {
+      new: true
     })
-    if (req.body.email === foundUser.email) {
-      throw new Error("This email is already taken")
-    } else {
-      let updatedUser = await Users.findOneAndUpdate({
-        email: req.body.email
-      }, {
-        name: req.body.prfname,
-        email: req.body.prfemail,
-        picture: req.body.newavatar,
-      })
-      res.redirect("profile", {
-        user: updatedUser
-      })
-    }
+    let UserHouses = await Houses.find({host: updatedUser._id})
+    res.redirect("profile", {
+          user: updatedUser
+        })
+    req.logout()
+    req.login(updatedUser, err => {
+      if (err) {
+        throw err
+      } else {
+        res.redirect("profile", {
+          user: updatedUser,
+          houses: UserHouses
+        })
+      }
+    })
   } catch (err) {
     next(err)
   }
-
 })
 
 
