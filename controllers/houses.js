@@ -21,39 +21,42 @@ const cleanEmptyField = (object) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    if (req.isAuthenticated()) {
-      let user = req.user
-      console.log(cleanEmptyField(req.query))
 
-      req.query = cleanEmptyField(req.query)
-      if (req.query.price) {
-        req.query.price = {
+      let sorting = req.query.sortprice
+      let user = req.user
+      let q = cleanEmptyField(req.query)
+      if (q.price) {
+        q.price = {
           $lte: req.query.price
         }
       }
-      if (req.query.title) {
-        let reg = new RegExp(req.query.title)
-        req.query.title = {
+      if (q.title) {
+        let reg = new RegExp(q.title)
+        q.title = {
           $regex: reg,
           $options: "gi"
         }
       }
 
-      let filteredHouses = await Houses.find(req.query)
-      if (filteredHouses.length > 0) {
-        let sortArray = filteredHouses.sort((a, b) => {
-          return req.query.sortprice = "lowtohigh" ? a.price - b.price : b.price - a.price
-        })
+      let filteredHouses = await Houses.find({})
+
+      // Sort depending on price sort input
+      if (sorting == "lowtohigh") {
+         filteredHouses = await Houses.find(q).sort("price")
       } else {
-          throw new Error("No property were found in the DB")
-        }
+       filteredHouses = await Houses.find(q).sort("-price")
+      }
+
+      if (filteredHouses.length == 0) {
+        throw new Error("No property were found in the DB")
+      }
+
       res.render("houses/list", {
         user: user,
-        houses: filteredHouses
+        houses: filteredHouses,
+        query: q
       })
-    } else {
-      res.redirect("/auth/login");
-    }
+
   } catch (err) {
     next(err)
   }
