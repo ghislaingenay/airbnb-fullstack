@@ -5,31 +5,31 @@
   <form action="/houses/{{housed._id}}?_method=PATCH" method="POST">
     <div class="mb-3">
       <h6 class="font-weight-bold mb-1 mt-0">Short Title</h6>
-      <input type="text" name="title" class="form-control" placeholder="{{housed.title}}">
+      <input type="text" name="title" class="form-control" value="{{housed.title}}">
     </div>
     <div class="mb-3">
       <h6 class="font-weight-bold mb-1 mt-0">Description</h6>
-      <textarea class="form-control" name="description" rows="3" placeholder="{{{housed.description}}}"></textarea>
+      <textarea class="form-control" name="description" rows="3">{{housed.description}}</textarea>
     </div>
     <div class="mb-3">
       <h6 class="font-weight-bold mb-1 mt-0">Number of rooms</h6>
       <select name="rooms" class="form-select" aria-label="Default select example">
         {{!-- if {{house.rooms}} selected {{/if}} --}}
-        <option {{#ifEq house.rooms '' }}selected{{/ifEq}}>Any rooms</option>
-        <option {{#ifEq house.rooms '1' }}selected{{/ifEq}}value="1">1 room</option>
-        <option {{#ifEq house.rooms '2' }}selected{{/ifEq}} value="2">2 rooms</option>
-        <option {{#ifEq house.rooms '3' }}selected{{/ifEq}}value="3">3 rooms</option>
-        <option {{#ifEq house.rooms '4' }}selected{{/ifEq}}value="4">4 rooms</option>
-        <option {{#ifEq house.rooms '5' }}selected{{/ifEq}}value="5">5 rooms</option>
+        <option {{#ifEq housed.rooms '' }} selected {{/ifEq}}>Any rooms</option>
+        <option {{#ifEq housed.rooms 1 }} selected {{/ifEq}}value="1">1 room</option>
+        <option {{#ifEq housed.rooms 2 }} selected {{/ifEq}} value="2">2 rooms</option>
+        <option {{#ifEq housed.rooms 3 }} selected {{/ifEq}} value="3">3 rooms</option>
+        <option {{#ifEq housed.rooms 4 }} selected {{/ifEq}}value="4">4 rooms</option>
+        <option {{#ifEq housed.rooms 5 }} selected {{/ifEq}}value="5">5 rooms</option>
       </select>
     </div>
     <div class="mb-3">
       <h6 class="font-weight-bold mb-1 mt-0">Location</h6>
       <select class="form-select" name="location" aria-label="Default select example">
-        <option selected>{{housed.location}}</option>
-        <option {{#ifEq house.location 'Koh Phangan' }}selected{{/ifEq}} value="Koh Phangan">Koh Phangan</option>
-        <option {{#ifEq house.location 'Koh Samui' }}selected{{/ifEq}} value="Koh Samui">Koh Samui</option>
-        <option {{#ifEq house.location 'Bali' }}selected{{/ifEq}}value="Bali">Bali</option>
+        <option {{#ifEq housed.location 'Any location' }} selected {{/ifEq}}>Any location</option>
+        <option {{#ifEq housed.location 'Koh Phangan' }} selected {{/ifEq}} value="Koh Phangan">Koh Phangan</option>
+        <option {{#ifEq housed.location 'Koh Samui' }} selected {{/ifEq}} value="Koh Samui">Koh Samui</option>
+        <option {{#ifEq housed.location 'Bali' }} selected {{/ifEq}}value="Bali">Bali</option>
       </select>
     </div>
 
