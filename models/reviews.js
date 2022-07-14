@@ -21,11 +21,7 @@ const reviewSchema = new mongoose.Schema({
     ref: "houses",
     required: true,
   },
-  rating: {
-    type: Number,
-    min: -1,
-    max: 1
-  }
+  rating: Number,
 })
 
 module.exports = mongoose.model("reviews", reviewSchema)

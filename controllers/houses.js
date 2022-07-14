@@ -8,6 +8,7 @@ const Users = require('../models/users')
 const Houses = require('../models/houses')
 const Bookings = require('../models/bookings')
 const moment = require('moment')
+const Reviews = require('../models/reviews')
 
 // Function which take one object and return only the key which have a value
 const cleanEmptyField = (object) => {
@@ -48,11 +49,9 @@ router.get("/", async (req, res, next) => {
       } else {
        filteredHouses = await Houses.find(q).sort("-price")
       }
-
       if (filteredHouses.length == 0) {
         throw new Error("No property were found in the DB")
       }
-
       res.render("houses/list", {
         user: user,
         houses: filteredHouses,
@@ -91,32 +90,45 @@ router.get("/create", (req, res) => {
 
 router.get("/:id", async (req, res) => {
   let user = req.user
-  let house = await Houses.findById(req.params.id).populate("host")
+  let house = await Houses.findById(req.params.id)
   let bookingsFound = await Bookings.find({house: req.params.id, author: user})
+  let reviewsFound = await Reviews.find({house: req.params.id}).sort("date")
+  // let note = 0
+  // if (reviewsFound.length == null) {
+  //   note = 0
+  // } else if (reviewsFound.length == 1) {
+  //   note = reviewsFound[0].rating
+  // } else {
+  //   note = reviewsFound.reduce((t,e) => t.rating + e.rating)
+  // }
+  let note = 0
+  console.log(house)
+  let length = reviewsFound.length
+
+  reviewsFound.map(review => )
+  
   if (bookingsFound) {
     let time = moment(bookingsFound.date).format("DD MMMM YYYY - HH:mm")
     res.render("houses/one", {
       user: user,
       house: house,
       booking: bookingsFound,
-      time: time
+      time: time,
+      note: note,
+      reviews: reviewsFound,
+      length: length,
     })
   }
-  res.render("houses/one", {
-    user: user,
-    house: house
-  })
-
 })
 
 router.get("/:id/edit", async (req, res) => {
   if (req.isAuthenticated()) {
     let user = req.user
     let houseId = await Houses.findById(req.params.id)
+    console.log(houseId)
     res.render("houses/edit", {
       user: user,
       housed: houseId
-
     })
   } else {
     res.redirect("/auth/login");
@@ -148,24 +160,14 @@ router.patch("/:id", async (req, res, next) => {
       })
       console.log(updatedHouse)
       let user = req.user
-      req.logout()
-      
-      req.login(user, err => {
-        if (err) {
-          throw err
-        } else {
-          res.redirect(`/houses/${updatedHouse._id}`)
-        }
-      })
-    
-  } catch (err) {
+
+      res.redirect(`/houses/${updatedHouse._id}`)
+        
+      }
+   catch (err) {
     next(err)
   }
-
 })
-
-
-
 
 router.delete("/:id", (req, res) => {
   if (req.isAuthenticated()) {
