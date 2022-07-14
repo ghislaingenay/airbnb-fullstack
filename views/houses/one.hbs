@@ -76,7 +76,7 @@
               <p>{{review.description}}</p>
             </div>
             <div class="col-1">
-              {{#ifGt note 0}}
+              {{#ifGt review.rating 0}}
               <i class="fa-solid fa-thumbs-up text-success"></i>
               {{else}}
               <i class="fa-solid fa-thumbs-down text-danger"></i>
