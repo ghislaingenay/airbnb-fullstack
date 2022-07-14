@@ -7,6 +7,7 @@ const router = express.Router()
 const Users = require('../models/users')
 const Houses = require('../models/houses')
 const Bookings = require('../models/bookings')
+const moment = require('moment')
 
 // Function which take one object and return only the key which have a value
 const cleanEmptyField = (object) => {
@@ -93,10 +94,12 @@ router.get("/:id", async (req, res) => {
   let house = await Houses.findById(req.params.id).populate("host")
   let bookingsFound = await Bookings.find({house: req.params.id, author: user})
   if (bookingsFound) {
+    let time = moment(bookingsFound.date).format("DD MMMM YYYY - HH:mm")
     res.render("houses/one", {
       user: user,
       house: house,
       booking: bookingsFound,
+      time: time
     })
   }
   res.render("houses/one", {
