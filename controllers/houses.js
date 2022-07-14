@@ -25,38 +25,38 @@ const cleanEmptyField = (object) => {
 router.get("/", async (req, res, next) => {
   try {
 
-      let sorting = req.query.sortprice
-      let user = req.user
-      let q = cleanEmptyField(req.query)
-      if (q.price) {
-        q.price = {
-          $lte: req.query.price
-        }
+    let sorting = req.query.sortprice
+    let user = req.user
+    let q = cleanEmptyField(req.query)
+    if (q.price) {
+      q.price = {
+        $lte: req.query.price
       }
-      if (q.title) {
-        let reg = new RegExp(q.title)
-        q.title = {
-          $regex: reg,
-          $options: "gi"
-        }
+    }
+    if (q.title) {
+      let reg = new RegExp(q.title)
+      q.title = {
+        $regex: reg,
+        $options: "gi"
       }
+    }
 
-      let filteredHouses = await Houses.find({})
+    let filteredHouses = await Houses.find({})
 
-      // Sort depending on price sort input
-      if (sorting == "lowtohigh") {
-         filteredHouses = await Houses.find(q).sort("price")
-      } else {
-       filteredHouses = await Houses.find(q).sort("-price")
-      }
-      if (filteredHouses.length == 0) {
-        throw new Error("No property were found in the DB")
-      }
-      res.render("houses/list", {
-        user: user,
-        houses: filteredHouses,
-        query: q
-      })
+    // Sort depending on price sort input
+    if (sorting == "lowtohigh") {
+      filteredHouses = await Houses.find(q).sort("price")
+    } else {
+      filteredHouses = await Houses.find(q).sort("-price")
+    }
+    if (filteredHouses.length == 0) {
+      throw new Error("No property were found in the DB")
+    }
+    res.render("houses/list", {
+      user: user,
+      houses: filteredHouses,
+      query: q
+    })
 
   } catch (err) {
     next(err)
@@ -91,8 +91,14 @@ router.get("/create", (req, res) => {
 router.get("/:id", async (req, res) => {
   let user = req.user
   let house = await Houses.findById(req.params.id)
-  let bookingsFound = await Bookings.find({house: req.params.id, author: user})
-  let reviewsFound = await Reviews.find({house: req.params.id}).sort("date")
+  let bookingsFound = await Bookings.find({
+    house: req.params.id,
+    author: user
+  })
+  let reviewsFound = await Reviews.find({
+    house: req.params.id
+  }).populate("author").sort("date")
+  console.log(reviewsFound)
   // let note = 0
   // if (reviewsFound.length == null) {
   //   note = 0
@@ -101,25 +107,26 @@ router.get("/:id", async (req, res) => {
   // } else {
   //   note = reviewsFound.reduce((t,e) => t.rating + e.rating)
   // }
-  let note = 0
-  console.log(house)
+
+  let modifiedReviews = reviewsFound.map(element => {
+    moment(element.[0].date).format("DD MMMM YYYY - HH:mm")
+  })
+  console.log(modifiedReviews)
   let length = reviewsFound.length
 
-  reviewsFound.map(review => )
-  
-  if (bookingsFound) {
-    let time = moment(bookingsFound.date).format("DD MMMM YYYY - HH:mm")
-    res.render("houses/one", {
-      user: user,
-      house: house,
-      booking: bookingsFound,
-      time: time,
-      note: note,
-      reviews: reviewsFound,
-      length: length,
-    })
-  }
+
+  let time = moment(bookingsFound.date).format("DD MMMM YYYY - HH:mm")
+  res.render("houses/one", {
+    user: user,
+    house: house,
+    booking: bookingsFound,
+    time: time,
+    note: 1,
+    reviews: reviewsFound,
+    length: length,
+  })
 })
+
 
 router.get("/:id/edit", async (req, res) => {
   if (req.isAuthenticated()) {
@@ -154,17 +161,16 @@ router.post("/", async (req, res, next) => {
 router.patch("/:id", async (req, res, next) => {
   // if (req.isAuthenticated()) {
   try {
-      let updatedHouse = await Houses.findByIdAndUpdate(
-        req.params.id, req.body, {
+    let updatedHouse = await Houses.findByIdAndUpdate(
+      req.params.id, req.body, {
         new: true
       })
-      console.log(updatedHouse)
-      let user = req.user
+    console.log(updatedHouse)
+    let user = req.user
 
-      res.redirect(`/houses/${updatedHouse._id}`)
-        
-      }
-   catch (err) {
+    res.redirect(`/houses/${updatedHouse._id}`)
+
+  } catch (err) {
     next(err)
   }
 })

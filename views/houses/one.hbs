@@ -42,8 +42,7 @@
 
       <p class="mt-2">{{house.description}}</p>
 
-      <h2 class="mt-5">{{length}} Review</h2>
-
+      <h2 class="mt-5">{{length}} Reviews</h2>
 
       <form action="/reviews" method="POST">
         <input type="hidden" name="house" value="{{house._id}}" />
@@ -71,7 +70,7 @@
               <img class="img-fluid rounded-circle" src="{{review.author.picture}}" alt="profile picture">
             </div>
             <div class="col-10">
-              <small class="text-secondary">{{time}}</small>
+              <small class="text-secondary">{{review.date}}</small>
               <h6>{{review.author.name}}</h6>
               <p>{{review.description}}</p>
             </div>
@@ -88,10 +87,6 @@
       </div>
       {{/each}}
       {{/if}}
-
-
-
-
     </div>
     {{#if booking}}
     <div class="col-lg-4 col-sm-12 mb-4">
