@@ -72,7 +72,17 @@
         </div>
       </div>
     </div>
-
+    {{#if booking}}
+    <div class="col-lg-4 col-sm-12 mb-4">
+      <div class="card p-3 shadow text-start">
+        <h3>$350/night</h3>
+        <small>2 Reviews</small>
+        <div class="alert alert-success mt-2" role="alert">
+          Thank you for your enquiry
+        </div>
+      </div>
+    </div>
+    {{else}}
     <!-- Request a booking -->
     <div class="col-lg-4 col-sm-12 mb-4">
       <div class="card p-3 shadow text-start">
@@ -84,12 +94,8 @@
             id="exampleFormControlTextarea1" rows="5"></textarea>
           <button type="submit" class="btn btn-success  mt-2">Request a booking</button>
         </form>
-        <!-- <h3>$350/night</h3>
-          <small>2 Reviews</small>
-          <div class="alert alert-success mt-2" role="alert">
-            Thank you for your enquiry
-          </div> -->
       </div>
     </div>
+    {{/if}}
   </div>
 </div>

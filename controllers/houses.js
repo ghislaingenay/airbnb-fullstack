@@ -6,6 +6,7 @@ const router = express.Router()
 
 const Users = require('../models/users')
 const Houses = require('../models/houses')
+const Bookings = require('../models/bookings')
 
 // Function which take one object and return only the key which have a value
 const cleanEmptyField = (object) => {
@@ -90,7 +91,14 @@ router.get("/create", (req, res) => {
 router.get("/:id", async (req, res) => {
   let user = req.user
   let house = await Houses.findById(req.params.id).populate("host")
-  console.log(house);
+  let bookingsFound = await Bookings.find({house: req.params.id, author: user})
+  if (bookingsFound) {
+    res.render("houses/one", {
+      user: user,
+      house: house,
+      booking: bookingsFound,
+    })
+  }
   res.render("houses/one", {
     user: user,
     house: house
@@ -128,15 +136,33 @@ router.post("/", async (req, res, next) => {
   }
 })
 
-router.patch("/:id", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.render("houses/:id", {
-      user: user
-    })
-  } else {
-    res.redirect("/auth/login");
+router.patch("/:id", async (req, res, next) => {
+  // if (req.isAuthenticated()) {
+  try {
+      let updatedHouse = await Houses.findByIdAndUpdate(
+        req.params.id, req.body, {
+        new: true
+      })
+      console.log(updatedHouse)
+      let user = req.user
+      req.logout()
+      
+      req.login(user, err => {
+        if (err) {
+          throw err
+        } else {
+          res.redirect(`/houses/${updatedHouse._id}`)
+        }
+      })
+    
+  } catch (err) {
+    next(err)
   }
+
 })
+
+
+
 
 router.delete("/:id", (req, res) => {
   if (req.isAuthenticated()) {
