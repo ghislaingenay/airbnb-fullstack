@@ -24,7 +24,7 @@ const cleanEmptyField = (object) => {
 
 router.get("/", async (req, res, next) => {
   try {
-
+    
     let sorting = req.query.sortprice
     let user = req.user
     let q = cleanEmptyField(req.query)
@@ -41,8 +41,8 @@ router.get("/", async (req, res, next) => {
       }
     }
 
-    let filteredHouses = await Houses.find({})
-
+    let filteredHouses = []
+//  Recover the reviews directly inside the filteredHouses
     // Sort depending on price sort input
     if (sorting == "lowtohigh") {
       filteredHouses = await Houses.find(q).sort("price")
@@ -52,10 +52,13 @@ router.get("/", async (req, res, next) => {
     if (filteredHouses.length == 0) {
       throw new Error("No property were found in the DB")
     }
+    const reviews = await Reviews.find()
+
     res.render("houses/list", {
       user: user,
       houses: filteredHouses,
-      query: q
+      query: q,
+      reviews: reviews
     })
 
   } catch (err) {
@@ -98,22 +101,8 @@ router.get("/:id", async (req, res) => {
   let reviewsFound = await Reviews.find({
     house: req.params.id
   }).populate("author").sort("date")
-  console.log(reviewsFound)
-  // let note = 0
-  // if (reviewsFound.length == null) {
-  //   note = 0
-  // } else if (reviewsFound.length == 1) {
-  //   note = reviewsFound[0].rating
-  // } else {
-  //   note = reviewsFound.reduce((t,e) => t.rating + e.rating)
-  // }
 
-  let modifiedReviews = reviewsFound.map(element => {
-    moment(element.[0].date).format("DD MMMM YYYY - HH:mm")
-  })
-  console.log(modifiedReviews)
   let length = reviewsFound.length
-
 
   let time = moment(bookingsFound.date).format("DD MMMM YYYY - HH:mm")
   res.render("houses/one", {
