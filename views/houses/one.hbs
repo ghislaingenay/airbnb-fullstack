@@ -5,14 +5,18 @@
 
 
     <div class="col p-0 align-self-center col-lg-6 col-12">
-      <img width="100%" src="{{house.photos.[0]}}" alt="Picture Luxury Villa Chaweng" />
+      </button onclick="changePicture(this)">
+      <img class="firstpicture" width="100%" src="{{house.photos.[0]}}" alt="Picture Luxury Villa Chaweng" />
+      </button>
     </div>
     <div class="col align-self-center col-lg-6 col-12  ">
 
       <div class="row row-cols-lg-3  row-cols-5 pt-2 pt-lg-0 pt-sm-4 text-end g-4">
         {{#each house.photos as |photo|}}
         <div class="col px-0 align-items-center side-picture">
-          <img class="img-fluid" src="{{photo}}" alt="" width="70%">
+
+          <img onclick="changePicture(this)" class=" img-fluid pht" src="{{photo}}" alt="" width="70%">
+          </button>
         </div>
         {{/each}}
       </div>
@@ -21,6 +25,7 @@
 </div>
 <!-- Text and reviews -->
 <div class="container pt-4">
+
   <div class="row">
     <div class="col-lg-7 col-xs-12">
       <!-- Left -->
