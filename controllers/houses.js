@@ -1,7 +1,4 @@
 const express = require('express')
-const {
-  reset
-} = require('nodemon')
 const router = express.Router()
 
 const Users = require('../models/users')

@@ -1,5 +1,4 @@
 const express = require('express')
-const reset = require('nodemon')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const salt = bcrypt.genSaltSync(10)
