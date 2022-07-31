@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/login", (req, res) => {
+    let user = req.user
     res.render("login")
   })
 
@@ -44,7 +45,7 @@ router.post("/login", async (req, res, next) => {
             if (err) {
               throw err
             } else {
-              res.render("houses/list")
+              res.redirect("/houses")
             }
           })
         } else {
