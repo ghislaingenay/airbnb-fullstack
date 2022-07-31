@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/login", (req, res) => {
-  res.redirect("/houses")
+  res.redirect("/auth/login")
 })
 
 router.get("/signup", (req, res) => {
