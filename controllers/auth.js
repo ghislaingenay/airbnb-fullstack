@@ -6,15 +6,26 @@ const salt = bcrypt.genSaltSync(10)
 const Users = require('../models/users')
 
 router.get("/", (req, res) => {
-  res.redirect("./houses/list")
+  res.redirect("/houses")
 })
 
 router.get("/login", (req, res) => {
-  res.redirect("/auth/login")
+  
+  let user = req.user
+  if (user) {
+    res.redirect("/houses")
+  } else {
+    res.redirect("/auth/login")
+  }
 })
 
 router.get("/signup", (req, res) => {
-  res.render("signup")
+  let user = req.user
+  if (user) {
+    res.redirect("/houses")
+  } else {
+    res.redirect("/auth/login")
+  }
 })
 
 router.get("/logout", (req, res) => {
