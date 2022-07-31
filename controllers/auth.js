@@ -10,21 +10,14 @@ router.get("/", (req, res) => {
 })
 
 router.get("/login", (req, res) => {
-  
-  let user = req.user
-  if (user) {
-    res.redirect("/houses")
-  } else {
-    res.redirect("/auth/login")
-  }
-})
+    res.render("login")
+  })
 
 router.get("/signup", (req, res) => {
-  let user = req.user
-  if (user) {
+  if (req.isAuthenticated()) {
     res.redirect("/houses")
   } else {
-    res.redirect("/auth/login")
+    res.render("signup")
   }
 })
 
